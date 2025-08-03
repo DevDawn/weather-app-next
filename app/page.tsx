@@ -50,29 +50,37 @@ export default function Home() {
                 <div className="text-center mb-4">
                   <h2 className="text-2xl font-bold">{weather.name}</h2>
                   <div className="flex items-center justify-center gap-2 mt-2">
-                    <img
-                      src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                      alt={weather.weather[0].description}
-                      width={80}
-                      height={80}
-                    />
+                    {weather.weather?.[0] && (
+                      <img
+                        src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                        alt={weather.weather[0].description}
+                        width={80}
+                        height={80}
+                      />
+                    )}
+
                     <div className="text-5xl font-bold">{Math.round(weather.main.temp)} °C</div>
                   </div>
-                  <div className="text-gray-500 mt-1 capitalize">{weather.weather[0].description}</div>
+                  {weather.weather?.[0]?.description && (
+                    <div className="text-gray-500 mt-1 capitalize">
+                      {weather.weather[0].description}
+                    </div>
+                  )}
+
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-6">
                   <div className="text-center">
-                    <Thermometer className="w-6 h-6 mx-auto text-orange-500"/>
+                    <Thermometer className="w-6 h-6 mx-auto text-orange-500" />
                     <div className="mt-2 text-sm text-gray-500">Feels Like</div>
                     <div className="font-semibold">{Math.round(weather.main.feels_like)}°C</div>
                   </div>
                   <div className="text-center">
-                    <Droplet className="w-6 h-6 mx-auto text-blue-500"/>
+                    <Droplet className="w-6 h-6 mx-auto text-blue-500" />
                     <div className="mt-2 text-sm text-gray-500">Humidity</div>
                     <div className="font-semibold">{Math.round(weather.main.humidity)}°C</div>
                   </div>
                   <div className="text-center">
-                    <Wind className="w-6 h-6 mx-auto text-teal-500"/>
+                    <Wind className="w-6 h-6 mx-auto text-teal-500" />
                     <div className="mt-2 text-sm text-gray-500">Wind</div>
                     <div className="font-semibold">{Math.round(weather.wind.speed)}m/s</div>
                   </div>
